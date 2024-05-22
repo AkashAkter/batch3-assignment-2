@@ -17,3 +17,5 @@ export type TProduct = {
   variants: TProductVariant[];
   inventory: TProductInventory;
 };
+
+export default TProduct;

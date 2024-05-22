@@ -7,7 +7,7 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use("/api/products", ProductRoutes);
+app.use("/api", ProductRoutes);
 
 const getAController = (req: Request, res: Response) => {
   const a = 10;

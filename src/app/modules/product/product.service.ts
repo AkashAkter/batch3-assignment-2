@@ -6,6 +6,46 @@ const createProductIntoDB = async (product: TProduct) => {
   return result;
 };
 
+const getAllProductFromDB = async (searchTerm?: string) => {
+  let query = {};
+
+  if (searchTerm) {
+    query = {
+      $or: [
+        { name: { $regex: searchTerm, $options: "i" } },
+        { description: { $regex: searchTerm, $options: "i" } },
+      ],
+    };
+  }
+
+  const result = await ProductModel.find(query);
+  return result;
+};
+
+const getSingleProductFromDB = async (id: string) => {
+  const result = await ProductModel.findOne({ _id: id });
+  return result;
+};
+
+const updateSingleProductFromDB = async (
+  id: string,
+  updateData: Partial<TProduct>
+) => {
+  const result = await ProductModel.findByIdAndUpdate(id, updateData, {
+    new: true,
+  });
+  return result;
+};
+
+const deleteSingleProductFromDB = async (id: string) => {
+  const result = await ProductModel.findOneAndDelete({ id });
+  return result;
+};
+
 export const ProductServices = {
   createProductIntoDB,
+  getAllProductFromDB,
+  getSingleProductFromDB,
+  updateSingleProductFromDB,
+  deleteSingleProductFromDB,
 };
