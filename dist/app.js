@@ -15,7 +15,7 @@ app.use("/api", order_route_1.OrderRoutes);
 const getAController = (req, res) => {
     res.send("Hello World!");
 };
-app.get("./", getAController);
+app.get("/", getAController);
 app.use((req, res) => {
     res.status(404).json({
         success: false,

@@ -15,7 +15,7 @@ const getAController = (req: Request, res: Response) => {
   res.send("Hello World!");
 };
 
-app.get("./", getAController);
+app.get("/", getAController);
 
 app.use((req: Request, res: Response) => {
   res.status(404).json({
