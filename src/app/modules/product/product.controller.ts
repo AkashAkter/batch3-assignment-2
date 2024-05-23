@@ -15,11 +15,10 @@ const createProduct = async (req: Request, res: Response) => {
       message: "Product created successfully",
       data: result,
     });
-  } catch (err: any) {
+  } catch {
     res.status(500).json({
       success: false,
-      message: err.message || "Something went wrong",
-      data: err,
+      message: "Something went wrong",
     });
   }
 };

@@ -12,7 +12,6 @@ app.use("/api", ProductRoutes);
 app.use("/api", OrderRoutes);
 
 const getAController = (req: Request, res: Response) => {
-  const a = 10;
   res.send("Hello World!");
 };
 
