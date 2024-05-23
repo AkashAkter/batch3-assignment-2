@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+// Define Zod schema for an order
 export const zodOrder = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   productId: z.string(),

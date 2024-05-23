@@ -1,18 +1,18 @@
 import { z } from "zod";
 
-// Define Zod schema for TProductVariant
+// Schema for product variant validation
 const ProductVariantValidationSchema = z.object({
   type: z.string().min(1),
   value: z.string().min(1),
 });
 
-// Define Zod schema for TProductInventory
+// Schema for product inventory validation
 const ProductInventoryValidationSchema = z.object({
   quantity: z.number().min(0),
   inStock: z.boolean(),
 });
 
-// Define Zod schema for TProduct
+// Schema for product validation
 const ProductValidationSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),

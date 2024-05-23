@@ -5,6 +5,7 @@ import {
   TProductVariant,
 } from "./product.interface";
 
+// Define schema for product variant
 const productVariantSchema = new Schema<TProductVariant>({
   type: {
     type: String,
@@ -16,7 +17,7 @@ const productVariantSchema = new Schema<TProductVariant>({
   },
 });
 
-// Create the inventory schema
+// Define schema for product inventory
 const productInventorySchema = new Schema<TProductInventory>({
   quantity: {
     type: Number,
@@ -28,7 +29,7 @@ const productInventorySchema = new Schema<TProductInventory>({
   },
 });
 
-// Create the product schema
+// Define schema for product
 const productSchema = new Schema<TProduct>({
   name: {
     type: String,
@@ -61,5 +62,6 @@ const productSchema = new Schema<TProduct>({
   },
 });
 
+// Create the Product model
 const ProductModel = model<TProduct>("Product", productSchema);
 export default ProductModel;

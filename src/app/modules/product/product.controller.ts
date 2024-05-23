@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
 import ProductValidationSchema from "./product.zod.validation";
 
+// Controller function to create a new product
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { product: productData } = req.body;
@@ -23,6 +24,7 @@ const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+// Controller function to get all products
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query.searchTerm as string | undefined;
@@ -45,6 +47,7 @@ const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
+// Controller function to get a single product by ID
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -62,6 +65,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
+// Controller function to update a single product by ID
 const updateSingleProduct = async (req: Request, res: Response) => {
   try {
     const productId = req.params.productId;
@@ -83,6 +87,7 @@ const updateSingleProduct = async (req: Request, res: Response) => {
   }
 };
 
+// Controller function to delete a single product by ID
 const deleteSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.body;
