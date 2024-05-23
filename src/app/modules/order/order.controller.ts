@@ -48,24 +48,25 @@ export const getAllOrder = async (req: Request, res: Response) => {
     const result = await getAllOrderFromDB(find);
 
     // Prepare response
-    const response: any = {
-      success: result.length > 0,
-      message:
-        result.length > 0
-          ? "Orders fetched successfully for user email!"
-          : "Order Not found",
-    };
-
-    // Include data in response if orders are found
+    let message = "";
     if (result.length > 0) {
-      response.data = result;
+      message = email
+        ? "Orders fetched successfully for user email!"
+        : "Orders fetched successfully!";
+    } else {
+      message = email ? "No orders found for user email." : "No orders found.";
     }
-    res.status(200).json(response);
+
+    res.status(200).json({
+      success: result.length > 0,
+      message,
+      data: result.length > 0 ? result : null,
+    });
   } catch {
     // Handle server errors
     res.status(500).json({
       success: false,
-      message: "Orders not found",
+      message: "Error occurred while fetching orders.",
     });
   }
 };
