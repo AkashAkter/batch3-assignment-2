@@ -44,7 +44,9 @@ export const getAllOrder = async (req: Request, res: Response) => {
     const response: any = {
       success: result.length > 0,
       message:
-        result.length > 0 ? "Orders fetched successfully!" : "Order Not found",
+        result.length > 0
+          ? "Orders fetched successfully for user email!"
+          : "Order Not found",
     };
 
     if (result.length > 0) {

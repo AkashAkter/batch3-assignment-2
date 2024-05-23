@@ -11,7 +11,7 @@ const createProduct = async (req: Request, res: Response) => {
     const result = await ProductServices.createProductIntoDB(zodParsedData);
     res.status(200).json({
       success: true,
-      message: "Product is created successfully",
+      message: "Product created successfully",
       data: result,
     });
   } catch (err: any) {
@@ -25,11 +25,16 @@ const createProduct = async (req: Request, res: Response) => {
 
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const searchTerm = req.query.searchTerm as string;
-    const result = await ProductServices.getAllProductFromDB(searchTerm);
+    const searchTerm = req.query.searchTerm as string | undefined;
+    const result = await ProductServices.getAllProductFromDB(searchTerm || "");
+
+    const message = searchTerm
+      ? `Products matching search term '${searchTerm}' fetched successfully!`
+      : "Products fetched successfully!";
+
     res.status(200).json({
       success: true,
-      message: "Products fetched successfully!",
+      message: message,
       data: result,
     });
   } catch (err) {
