@@ -12,7 +12,7 @@ app.use("/api", ProductRoutes);
 app.use("/api", OrderRoutes);
 
 const getAController = (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("SERVER IS RUNNING");
 };
 
 app.get("/", getAController);

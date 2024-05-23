@@ -13,7 +13,7 @@ app.use((0, cors_1.default)());
 app.use("/api", product_route_1.ProductRoutes);
 app.use("/api", order_route_1.OrderRoutes);
 const getAController = (req, res) => {
-    res.send("Hello World!");
+    res.send("SERVER IS RUNNING");
 };
 app.get("/", getAController);
 app.use((req, res) => {
