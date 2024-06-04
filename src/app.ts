@@ -17,7 +17,7 @@ const getAController = (req: Request, res: Response) => {
 
 app.get("/", getAController);
 
-// Handle 404 errors
+// Handle 404 error
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
