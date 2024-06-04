@@ -18,8 +18,8 @@ const product_zod_validation_1 = __importDefault(require("./product.zod.validati
 // Controller function to create a new product
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { product: productData } = req.body;
-        const zodParsedData = product_zod_validation_1.default.parse(productData);
+        const product = req.body;
+        const zodParsedData = product_zod_validation_1.default.parse(product);
         const result = yield product_service_1.ProductServices.createProductIntoDB(zodParsedData);
         res.status(200).json({
             success: true,
@@ -27,10 +27,11 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             data: result,
         });
     }
-    catch (_a) {
+    catch (err) {
         res.status(500).json({
             success: false,
-            message: "Something went wrong",
+            message: err.message || "Something went wrong",
+            error: err,
         });
     }
 });

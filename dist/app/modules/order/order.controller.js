@@ -12,21 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderControllers = exports.getAllOrder = exports.createOrder = void 0;
 const order_service_1 = require("./order.service");
 const order_validation_1 = require("./order.validation");
-// Destructure order services
+// order services
 const { createOrderIntoDB, getAllOrderFromDB } = order_service_1.orderServices;
-// Controller function to create an order
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    const { order } = body;
-    // Check if order data exists in the request body
-    if (!order) {
+    if (!body) {
         return res.send({
             success: false,
             message: "No order data found",
         });
     }
-    // Validate order data using Zod schema
-    const { data, error } = order_validation_1.zodOrder.safeParse(order);
+    const { data, error } = order_validation_1.zodOrder.safeParse(body);
     if (error) {
         return res.send({
             success: false,
@@ -34,47 +30,36 @@ const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             error,
         });
     }
-    // Call service function to create the order
     yield createOrderIntoDB(data, res);
 });
 exports.createOrder = createOrder;
-// Controller function to get all orders
+// get all order
 const getAllOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email } = req.query;
-        // Prepare query based on email
+        // response data
         const find = {};
         if (email) {
             find.email = email;
         }
-        // Call service function to get all orders
         const result = yield getAllOrderFromDB(find);
-        // Prepare response
-        let message = "";
-        if (result.length > 0) {
-            message = email
-                ? "Orders fetched successfully for user email!"
-                : "Orders fetched successfully!";
-        }
-        else {
-            message = email ? "No orders found for user email." : "No orders found.";
-        }
-        res.status(200).json({
+        const response = {
             success: result.length > 0,
-            message,
-            data: result.length > 0 ? result : null,
-        });
+            message: result.length > 0 ? "Orders fetched successfully!" : "Order Not found",
+        };
+        if (result.length > 0) {
+            response.data = result;
+        }
+        res.status(200).json(response);
     }
     catch (_a) {
-        // Handle server errors
         res.status(500).json({
             success: false,
-            message: "Error occurred while fetching orders.",
+            message: "Orders not found",
         });
     }
 });
 exports.getAllOrder = getAllOrder;
-// Export controller functions
 exports.OrderControllers = {
     createOrder: exports.createOrder,
     getAllOrder: exports.getAllOrder,

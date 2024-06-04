@@ -16,8 +16,7 @@ exports.ProductServices = void 0;
 const product_model_1 = __importDefault(require("./product.model"));
 // Function to create a new product in the database
 const createProductIntoDB = (Product) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = new product_model_1.default(Product);
-    const result = yield product.save();
+    const result = yield product_model_1.default.create(Product);
     return result;
 });
 // Function to get all products from the database, with an optional search term for filtering

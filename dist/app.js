@@ -16,17 +16,18 @@ const getAController = (req, res) => {
     res.send("SERVER IS RUNNING!");
 };
 app.get("/", getAController);
+// Handle 404 error
 app.use((req, res) => {
     res.status(404).json({
         success: false,
         message: "Route not found",
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    app.use((err, req, res) => {
-        res.status(500).json({
-            success: false,
-            message: "Internal Server Error",
-        });
+});
+// Handle 500 errors
+app.use((err, req, res) => {
+    res.status(500).json({
+        success: false,
+        message: "Internal Server Error",
     });
 });
 exports.default = app;
