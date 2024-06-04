@@ -5,20 +5,20 @@ import ProductValidationSchema from "./product.zod.validation";
 // Controller function to create a new product
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const { product: productData } = req.body;
+    const product = req.body;
 
-    const zodParsedData = ProductValidationSchema.parse(productData);
-
+    const zodParsedData = ProductValidationSchema.parse(product);
     const result = await ProductServices.createProductIntoDB(zodParsedData);
     res.status(200).json({
       success: true,
       message: "Product created successfully",
       data: result,
     });
-  } catch {
+  } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: "Something went wrong",
+      message: err.message || "Something went wrong",
+      error: err,
     });
   }
 };

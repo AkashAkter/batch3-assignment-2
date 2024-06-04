@@ -3,8 +3,7 @@ import ProductModel from "./product.model";
 
 // Function to create a new product in the database
 const createProductIntoDB = async (Product: TProduct) => {
-  const product = new ProductModel(Product);
-  const result = await product.save();
+  const result = await ProductModel.create(Product);
   return result;
 };
 
